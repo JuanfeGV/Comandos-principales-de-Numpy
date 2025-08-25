@@ -53,4 +53,51 @@
         [2 3]]
         Dimensiones: 2
 
+    # 4. Concatenar arreglos
+        #Ahora con esto podremos unir o concatar los arrays:
+        x = np.array([1, 2, 3])
+        y = np.array([4, 5, 6])
+        cat = np.concatenate((x, y))
+
+        print("Arreglo x:", x)
+        print("Arreglo y:", y)
+        print("Concatenado:", cat)
+
+    #Salida:
+        Arreglo x: [1 2 3]
+        Arreglo y: [4 5 6]
+        Concatenado: [1 2 3 4 5 6]
+
+    # 5. Operaciones básicas
+        #a) Con un solo arreglo
+            #Esta es una forma de usar operaciones basicas con los arreglos:
+            z = np.array([1, 2, 3, 4])
+            print("Array:", z)
+            print("Suma +10:", z + 10)
+            print("Multiplicación x2:", z * 2)
+            print("Potencia al cuadrado:", z ** 2)
+
+        #Salida:
+            Array: [1 2 3 4]
+            Suma +10: [11 12 13 14]
+            Multiplicación x2: [2 4 6 8]
+            Potencia al cuadrado: [ 1  4  9 16]
+
+        #b) Operaciones entre dos arreglos
+            #Esta es otra forma, donde operamos dos arrays:
+            Array1 = np.array([1, 2, 3, 4])
+            Array2 = np.array([5, 6, 7, 8])
+
+            print("Array1:", Array1)
+            print("Array2:", Array2)
+            print("Suma de los arrays:", Array1 + Array2)
+            print("Multiplicación entre los arrays:", Array1 * Array2)
+            print("Array1 elevado al Array2:", Array1 ** Array2)
+
+        #Salida:
+            Array1: [1 2 3 4]
+            Array2: [5 6 7 8]
+            Suma de los arrays: [ 6  8 10 12]
+            Multiplicación entre los arrays: [ 5 12 21 32]
+            Array1 elevado al Array2: [     1     64  2187 65536]
 
