@@ -324,3 +324,221 @@ Salida:
 Aclaración:
 
 El módulo np.random incluye más de 90 funciones, muchas de ellas orientadas a aplicaciones avanzadas como simulaciones científicas, modelado estadístico complejo o control detallado del generador de números aleatorios. En este documento se han seleccionado únicamente los comandos más útiles y representativos para un nivel introductorio, priorizando aquellos que permiten generar datos simulados, trabajar con distribuciones comunes, mezclar arreglos y controlar la reproducibilidad. Estas funciones cubren los casos más frecuentes.
+
+##### 7) Algebra lineal
+
+###### - np.dot(A, B) / A @ B
+Realiza el producto matricial entre dos arreglos o matrices.
+
+Estructura: np.dot(A, B) A @ B
+
+- A: Primer arreglo o matriz
+- B: Segundo arreglo o matriz
+
+Entrada:
+
+    A = np.array([[1, 2], [3, 4]])  
+    B = np.array([[5, 6], [7, 8]])  
+    print("Producto matricial:\n", np.dot(A, B))
+
+Salida: 
+
+    Producto matricial:
+    [[19 22]
+    [43 50]]
+
+###### - A.T
+Devuelve la transpuesta de una matriz (intercambia filas por columnas).
+
+Estructura: A.T
+- A: Matriz a transponer
+
+Entrada:
+    
+    A = np.array([[1, 2], [3, 4]])  
+    print("Transpuesta:\n", A.T)
+
+Salida: 
+
+    Transpuesta:
+    [[1 3]
+    [2 4]]
+
+###### - np.trace(A)
+Calcula la traza de una matriz (suma de los elementos de la diagonal principal).
+
+Estructura: np.trace(A)
+- A: Matriz cuadrada
+
+Entrada:
+
+    A = np.array([[1, 2], [3, 4]])  
+    print("Traza:", np.trace(A))
+
+Salida: 
+
+    Traza: 5 
+
+###### - np.linalg.det(A)
+Calcula el determinante de una matriz cuadrada.
+
+Estructura: np.linalg.det(A)
+- A: Matriz cuadrada
+
+Entrada:
+
+    A = np.array([[1, 2], [3, 4]])  
+    print("Determinante:", np.linalg.det(A))
+
+Salida: 
+
+    Determinante: -2.0000000000000004
+
+###### - np.linalg.inv(A)
+Calcula la inversa de una matriz cuadrada.
+
+Estructura: np.linalg.inv(A)
+- A: Matriz cuadrada
+
+Entrada:
+
+    A = np.array([[1, 2], [3, 4]])  
+    print("Inversa:\n", np.linalg.inv(A))
+
+Salida: 
+
+    Inversa:
+    [[-2.   1. ]
+    [ 1.5 -0.5]]
+
+###### - np.linalg.matrix_rank(A)
+Calcula el rango de una matriz (número de filas o columnas linealmente independientes).
+
+Estructura: np.linalg.matrix_rank(A)
+- A: Matriz
+
+Entrada:
+
+    A = np.array([[1, 2], [2, 4]])  
+    print("Rango:", np.linalg.matrix_rank(A))
+
+Salida: 
+
+    Rango: 1
+
+###### - np.linalg.norm(v)
+Calcula la norma (magnitud o longitud) de un vector.
+
+Estructura: np.linalg.norm(v)
+- v: Vector
+
+Entrada:
+
+    v = np.array([3, 4])  
+    print("Norma:", np.linalg.norm(v))
+
+Salida: 
+
+    Norma: 5.0
+
+###### - np.linalg.solve(A, b)
+Resuelve sistemas de ecuaciones lineales del tipo Ax = b.
+
+Estructura: np.linalg.solve(A, b)
+
+- A: Matriz de coeficientes
+- b: Vector de resultados
+
+Entrada:
+
+    A = np.array([[3, 1], [1, 2]])  
+    b = np.array([9, 8])  
+    print("Solución:", np.linalg.solve(A, b))
+
+Salida: 
+
+    Solución: [2. 3.]
+
+###### - np.linalg.eig(A)
+Calcula los valores propios y vectores propios de una matriz cuadrada.
+
+Estructura: np.linalg.eig(A)
+- A: Matriz cuadrada
+
+Entrada:
+
+    A = np.array([[1, 2], [2, 1]])  
+    valores, vectores = np.linalg.eig(A)  
+    print("Valores propios:", valores)  
+    print("Vectores propios:\n", vectores)
+
+Salida: 
+
+    Valores propios: [ 3. -1.]
+    Vectores propios:
+     [[ 0.70710678 -0.70710678]
+     [ 0.70710678  0.70710678]]
+
+###### - np.linalg.svd(A)
+Realiza la descomposición en valores singulares (SVD), útil en compresión y machine learning.
+
+Estructura: np.linalg.svd(A)
+- A: Matriz
+
+Entrada:
+
+A = np.array([[1, 0], [0, -1]])  
+U, S, V = np.linalg.svd(A)  
+print("U:\n", U)  
+print("S:", S)  
+print("V:\n", V)
+
+Salida: 
+
+    U:
+     [[1. 0.]
+     [0. 1.]]
+
+    S: [1. 1.]
+
+    V:
+     [[ 1.  0.]
+     [-0. -1.]]
+
+###### - np.identity(n)
+Crea una matriz identidad de tamaño n×n.
+
+Estructura: np.identity(n)
+
+- n: Tamaño de la matriz
+
+Entrada:
+
+    print("Matriz identidad de 3x3:\n", np.identity(3))
+
+Salida:
+
+    Matriz identidad de 3x3:
+     [[1. 0. 0.]
+     [0. 1. 0.]
+     [0. 0. 1.]]
+
+###### - np.diag(v)
+Crea una matriz diagonal a partir de un vector, o extrae la diagonal de una matriz.
+
+Estructura: np.diag(v)
+- v: Vector o matriz
+
+Entrada:
+
+    v = np.array([1, 2, 3])  
+    print("Matriz diagonal:\n", np.diag(v))
+
+Salida: 
+
+    Matriz diagonal:
+     [[1 0 0]
+     [0 2 0]
+     [0 0 3]]
+
+###### - np.cross(u, v)
