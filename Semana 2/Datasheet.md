@@ -542,3 +542,21 @@ Salida:
      [0 0 3]]
 
 ###### - np.cross(u, v)
+Calcula el producto cruz entre dos vectores en 3D.
+
+Estructura: np.cross(u, v)
+- u: Primer vector
+- v: Segundo vector
+
+Entrada:
+
+    u = np.array([1, 0, 0])  
+    v = np.array([0, 1, 0])  
+    print("Producto cruz:", np.cross(u, v))
+
+Salida: 
+
+    Producto cruz: [0 0 1]
+
+    
+```python
