@@ -102,4 +102,225 @@
             Array1 elevado al Array2: [     1     64  2187 65536]
 
 ```
+## Sección B – NumPy Estadísticas y Avanzado 
+    -Rama: B-numpy-estadisticas
 
+##### 1) Comando mean (media)
+Calcula el promedio de los elementos en un array 
+
+Entrada:
+    
+    pruebamean = np.array([10, 20, 30, 40, 50, 60, 70])
+     print("La media del Array pruebamean es:",np.mean(pruebamean))
+
+#salida: 
+
+    La media del Array pruebamean es: 40.0
+
+##### 2) Comando stg (desviación estándar)
+Mide la desviación de los datos respecto al promedio.
+
+Entrada:
+    
+    pruebastg = np.array([10, 20, 30, 40, 50, 60, 70])
+    print("La desviación estándar del Array pruebastd es:",np.std(pruebastd))
+#salida
+    
+    La desviación estándar del Array pruebastg es: 20.0
+
+##### 3) Comando sum (Suma elementos)
+Realiza la suma de todos los elementos
+
+Entrada:
+    
+    pruebasum = np.array([10, 20, 30, 40, 50, 60, 70])
+    print("La suma de elementos del Array pruebasum es:",np.sum(pruebasum))
+Salida:
+
+    La suma de elementos del Array pruebasum es: 280
+
+##### 4) Comando arange 
+Genera un array con una secuencia de números espaciados regularmente por un valor definido.
+
+###### Estructura: np.arange(inicio, final, paso)
+- inicio: Valor en el que inicia la secuencia
+- final: Valor límite  de la secuencia (no llega a este número)
+- Paso: tamaño del intervalo entre valores
+
+Entrada:
+    
+    print("La secuencia generada cada 2 números de 0 hasta el límite de 20 es: \n",np.arange(0, 20, 2))
+
+Salida:
+    
+    La secuencia generada cada 2 números de 0 hasta el límite de 20 es: 
+     [ 0  2  4  6  8 10 12 14 16 18]
+
+
+
+##### 5) Comando linspace
+Genera un arreglo de números equidistantes entre dos valores.
+
+###### Estructura: np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
+- start: valor inicial del intervalo.
+- stop: valor final del intervalo.
+- num: número de puntos que quieres generar (por defecto 50).
+- endpoint: si es True, incluye el valor final (stop) en el arreglo.
+- rtstep: si es True, además del arreglo, devuelve el paso entre los valores.
+- dtype: tipo de dato (float, int, etc.).
+
+Entrada:
+    
+    arr = np.linspace(0, 10, num=5)
+    print("El arreglo generado con 5 puntos de 0 a 10 es: ",arr)
+
+Salida:
+    
+    El arreglo generado con 5 puntos de 0 a 10 es:  [ 0.   2.5  5.   7.5 10. ]
+    
+##### 6) Comandos random
+Np.random es el módulo clásico de NumPy para generar números aleatorios. Permite crear datos simulados, mezclar arreglos, y trabajar con distribuciones estadísticas.
+
+###### - np.random.rand() 
+ Genera un número aleatorio entre 0 y 1
+
+ Estructura: random.rand(num)
+- num: cantidad de números entre 0 y 1 a generar.
+
+Entrada:
+
+    print("Este comando genera 4 números aleatorios entre 0 y 1: ",np.random.rand(4) )
+Salida:
+
+    Este comando genera 4 números aleatorios entre 0 y 1:  [0.04546665 0.86263969 0.61561942 0.33840701]
+
+###### - np.random.randint()
+Genera números enteros aleatorios en rango y cantidad deseada
+
+Estructura: np.random.randint(inicio, final, size=#)
+- Inicio: Parametro más bajo del rango de números aleatorios
+- Final Parametro más alto del rango de números aleatorios (no incluido)
+- Size: Cantidad de números deseados
+ 
+Entrada:
+
+    print("5 números aleatorios entre 1 y 10:",np.random.randint(1, 10, size=5))
+
+Salida: 
+
+    5 números aleatorios entre 1 y 10: [5 6 6 6 8]
+
+###### - np.random.normal()
+Devuelve un  arreglo o una matriz de números generados al azar que siguen una distribución normal estándar (media 0, desviación estándar 1).
+
+Estructura:    
+  - np.random.randn(num)
+num= cantidad de números generados
+
+- np.random.randn(fil, col)
+fil: número de filas de la matriz generada
+col: número de columnas de la matriz generada
+
+Entrada:
+
+    print("4 números aleatorios con distribución normal estándar",np.random.randn(4))
+
+Salida:
+
+    4 números aleatorios con distribución normal estándar [-0.49199468 -0.8327575  -1.82536419  1.32795976]
+
+###### - np.random.choice()
+Selecciona elementos aleatorios de una lista o array.
+
+Estructura:    
+np.random.choice(lista, size=5) 
+np.random.choice(lista, size=None, replace=True, p=None)
+
+- lista= lista o array del que se toman los datos 
+- size= cantidad de valores deseados a seleccionar en la lista (no obligatoria)
+- replace= Si es True, permite repetir elementos, si es False, no se repiten(no obligatoria)
+-p= Probabilidades asociadas a cada elemento. Debe ser un array del mismo tamaño que a, y sumar 1 (no obligatoria)
+
+Entrada:
+
+    opciones = ['profe', 'el', 'trabajo','esta', 'muy','largooo']
+    probabilidades= [0.20,0.20,0.20,0.20,0.10,0.10]
+    np.random.choice(opciones)              
+    print("ejemplo:", np.random.choice(opciones, size=5, replace= True, p=probabilidades) )
+
+Salida:
+
+    ejemplo: ['el' 'esta' 'largooo' 'trabajo' 'profe']
+
+###### - np.random.seed()
+Establece una semilla para el generador de números aleatorios de NumPy. Esto significa que, si usas la misma semilla, obtendrás los mismos resultados aleatorios cada vez que ejecutes el código.
+
+Estructura:    
+np.random.seed(num)
+- num= número que establece la semilla
+
+Entrada:
+
+    np.random.seed(42)
+    print("A pesar de ser un randint en la semilla 42 este comando será 6 3 7 4 6: \n",np.random.randint(0, 10, size=5))
+
+Salida:
+
+    A pesar de ser un randint en la semilla 42 este comando será 6 3 7 4 6: 
+    [6 3 7 4 6]
+
+
+###### - np.random.uniform()
+Genera números aleatorios uniformemente distribuidos en un rango personalizado.
+
+Estructura:    
+np.random.uniform(min, max, size=4)
+- min: Parametro más bajo del rango de números aleatorios
+- max Parametro más alto del rango de números aleatorios (no incluido)
+- Size: Cantidad de números deseados 
+
+Entrada:
+
+    np.random.uniform(5, 10, size=4) 
+
+Salida:
+
+    array([5.07983126, 6.15446913, 6.20512733, 8.41631759])
+
+###### - np.random.normal()
+Genera números con una distribución normal personalizada.
+
+Estructura:    
+np.random.normal(loc=0.0, escala=1.0, size=None)
+- loc: Media de la distribución deseada
+- escala: desviación estandar de la distribución deseada
+- Size: Cantidad de números deseados 
+
+Entrada:
+
+    np.random.normal(loc=10, scale=2, size=5)  # Media 10, desviación 2
+
+Salida:
+
+    array([12.26045639, 10.74623783,  9.2270541 ,  7.68245952, 11.13222565])
+
+###### - np.random.shuffle()
+Mezcla aleatoriamente los elementos de un arreglo.
+
+Estructura:    
+np.random.shuffle(arr)
+- arr: Arreglo a mezclar
+
+Entrada:
+
+    arreglo = np.array([1, 2, 3, 4, 5])
+    np.random.shuffle(arreglo)
+    print("El orden ya no es 1,2,3,4,5 es:", arreglo)  # El array queda desordenado
+
+Salida:
+
+    El orden ya no es 1,2,3,4,5 es: [1 5 3 2 4]
+
+Aclaración:
+
+El módulo np.random incluye más de 90 funciones, muchas de ellas orientadas a aplicaciones avanzadas como simulaciones científicas, modelado estadístico complejo o control detallado del generador de números aleatorios. En este documento se han seleccionado únicamente los comandos más útiles y representativos para un nivel introductorio, priorizando aquellos que permiten generar datos simulados, trabajar con distribuciones comunes, mezclar arreglos y controlar la reproducibilidad. Estas funciones cubren los casos más frecuentes.
