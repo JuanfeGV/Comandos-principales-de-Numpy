@@ -558,5 +558,62 @@ Salida:
 
     Producto cruz: [0 0 1]
 
-    
-```python
+###### Seccion C - Pandas y DataFrames
+    -Rama: C-pandas-dataframes
+        
+        QUE ES PANDAS?
+        
+         El nombre Pandas es en realidad una contracción del término Panel Data para series de datos que incluyen observaciones a lo largo de varios periodos de tiempo. La biblioteca se creó como herramienta de alto nivel para el análisis en Python.Donde los creadores de Pandas pretenden que esta biblioteca evolucione hasta convertirse en la herramienta de análisis y manipulación de datos de código abierto más potente y flexible.
+         
+         Además del análisis de datos, Pandas se utiliza mucho para la Data Wrangling,permitiendo englobar los métodos de transformación de datos no estructurados para hacerlos procesables. Por lo general, Pandas también destaca en el procesamiento de datos estructurados en forma de tablas, matrices o series temporales.
+
+         Pandas está diseñada específicamente para la manipulación y el análisis de datos en el lenguaje Python de esta manera logra ser potente, flexible y fácil de usar. Gracias a este por fin se puede utilizar el lenguaje Python para cargar, alinear, manipular o fusionar datos, donde el rendimiento es impresionante cuando el código fuente del back-end está escrito en C o Python.
+         
+        QUE ES UN DATAFRAME?
+
+         Un DataFrame es una serie de Series Pandas indexadas por un valor, los DataFrames son paneles bidimensionales compuestos por filas y columnas, que permiten destacar las relaciones entre las distintas variables de la serie de datos a diferencia de las Series, que son objetos correspondientes a paneles unidimensionale.
+
+        QUE ES UNA SERIE?
+
+         Una series es la estructura de datos unidimensional etiquetada siendo similar a un array de 1D de NumPy, pero tiene un índice que permite el acceso a los valores por etiqueta donde serie puede contener cualquier tipo de datosn como enteros, cadenas, objetos de Python, etc.
+
+         Una serie en Pandas tiene dos partes diferenciadas:
+         -Indice (index): Que es un array de etiquetas asociado a los datos.
+         -Valor (value): Por ende un value es un array de datos.
+
+        QUE ES LA CARGA DE DATOS?
+        
+         La carga de datos significa importar información desde un archivo o fuente externa hacia un DataFrame para poder trabajar con ella en Python por eso es el primer paso en casi cualquier análisis de datos que consiste en traer la información cruda a un entorno manejable.
+
+        QUE ES LA SELECCION DE COLUMNAS?
+
+         Es el proceso de elegir una o varias columnas específicas de un DataFrame para analizarlas o manipularlas como por ejemplo: 
+        
+         Pensemos que un DataFrame es como una tabla en Excel: cada columna es un campo (nombre, edad, ciudad, etc.) y puedes trabajar solo con las que necesites, nombre-ciudad, nombre- edad, etc.
+
+        Tipos de datos?
+
+         En Padas, cada columna de un DataFrame o cada Serie tiene un tipo de dato, que indica la naturaleza de la información que contiene números, texto, fechas, etc.
+         
+         Esto es muy importante porque determina qué operaciones se pueden hacer, ayudando a optimizar la memoria y el rendimiento.
+         
+         QUE TIPOS DE DATOS?
+
+         Numéricos 
+         Enteros->int64, int32, int16.
+         Decimales->float64, float32.
+         
+         Texto
+         object->Usado para texto.
+         string->Optimizado para trabajar con cadenas de caracteres.
+         
+         Booleanos
+         bool->Valores verdaeros o falsos.
+         
+         Fechas y tiempos
+         datetime64->Fechas y horas.
+         timedelta->Diferencias de tiempo.
+         
+         Categorías
+         category->Datos con un número limitado de valores repetidos. Muy útil para ahorrar memoria y acelerar cálculos.
+         
