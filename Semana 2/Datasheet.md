@@ -934,3 +934,466 @@ Salida:
                 C.to_JSON
 
                 D.to_SQL
+        
+        EJEMPLO:
+            
+            FILTRO:
+
+	            # Paso 1: importar pandas
+                import pandas as pd
+
+                # Paso 2: crear un DataFrame de ejemplo
+                data = {
+                "Empleado": ["Ana", "Luis", "Sofía", "Pedro", "Laura", "Carlos"],
+                "Edad": [22, 35, 29, 40, 19, 32],
+                "Ciudad": ["Bogotá", "Medellín", "Cali", "Bogotá", "Cali", "Medellín"],
+                "Salario": [2500, 4000, 3200, 5000, 1800, 4200]
+                }
+
+                df = pd.DataFrame(data)
+
+                print(" DataFrame original:\n")
+                print(df)
+
+                # Paso 3: aplicar un filtro avanzado
+                # Queremos los empleados que:
+                # - Sean mayores de 25 años
+                # - Que ganen más de 3000
+                # - Y que NO vivan en Cali
+                filtro = df[(df["Edad"] > 25) & (df["Salario"] > 3000) & (df["Ciudad"] != "Cali")]
+
+                print("\n Resultado del filtro avanzado:\n")
+                print(filtro)
+
+            RESULTADO:
+
+	            DataFrame original:
+
+                  Empleado  Edad    Ciudad  Salario
+                0      Ana    22    Bogotá     2500
+                1     Luis    35  Medellín     4000
+                2    Sofía    29      Cali     3200
+                3    Pedro    40    Bogotá     5000
+                4    Laura    19      Cali     1800
+                5   Carlos    32  Medellín     4200
+
+                Resultado del filtro avanzado:
+
+                  Empleado  Edad    Ciudad  Salario
+                1     Luis    35  Medellín     4000
+                3    Pedro    40    Bogotá     5000
+                5   Carlos    32  Medellín     4200
+
+            GROUPBY:
+
+	            import pandas as pd
+
+                # Paso 1: crear un DataFrame de ejemplo
+                data = {
+                "Ciudad": ["Bogotá", "Bogotá", "Medellín", "Medellín", "Cali", "Cali", "Bogotá", "Cali"],
+                "Vendedor": ["Ana", "Luis", "Sofía", "Pedro", "Ana", "Luis", "Pedro", "Sofía"],
+                "Ventas": [100, 200, 150, 300, 400, 500, 250, 350]
+                }
+
+                df = pd.DataFrame(data)
+
+                print(" DataFrame original:\n")
+                print(df)
+
+                # Paso 2: Agrupar por ciudad y sumar ventas
+                ventas_ciudad = df.groupby("Ciudad")["Ventas"].sum()
+
+                print("\n Ventas totales por ciudad:\n")
+                print(ventas_ciudad)
+
+                # Paso 3: Agrupar por ciudad y vendedor, calcular suma y promedio
+                ventas_detalle = df.groupby(["Ciudad", "Vendedor"])["Ventas"].agg(["sum", "mean", "count"])
+
+                print("\n Ventas por ciudad y vendedor (suma, promedio y cantidad de registros):\n")
+                print(ventas_detalle)
+
+                # Paso 4: Agrupar y mostrar la ciudad con mayor venta total
+                ciudad_top = ventas_ciudad.idxmax()
+                monto_top = ventas_ciudad.max()
+
+                print(f"\n La ciudad con más ventas fue: {ciudad_top} con un total de {monto_top} unidades vendidas.")
+
+            RESULTADO:
+
+	            DataFrame original:
+
+                     Ciudad Vendedor  Ventas
+                0    Bogotá      Ana     100
+                1    Bogotá     Luis     200
+                2  Medellín    Sofía     150
+                3  Medellín    Pedro     300
+                4      Cali      Ana     400
+                5      Cali     Luis     500
+                6    Bogotá    Pedro     250
+                7      Cali    Sofía     350
+
+                Ventas totales por ciudad:
+
+                Ciudad
+                Bogotá       550
+                Cali        1250
+                Medellín     450
+                Name: Ventas, dtype: int64
+
+                Ventas por ciudad y vendedor (suma, promedio y cantidad de registros):
+
+                                   sum   mean  count
+                Ciudad   Vendedor                   
+                Bogotá   Ana       100  100.0      1
+                         Luis      200  200.0      1
+                         Pedro     250  250.0      1
+                Cali     Ana       400  400.0      1
+                         Luis      500  500.0      1
+                         Sofía     350  350.0      1
+                Medellín Pedro     300  300.0      1
+                         Sofía     150  150.0      1
+
+                La ciudad con más ventas fue: Cali con un total de 1250 unidades vendidas.
+
+            MERGE/JOIN:
+
+	            MERGE:
+		
+		            import pandas as pd
+
+                    # Paso 1: Crear DataFrame de clientes
+                    clientes = pd.DataFrame({
+                    "id_cliente": [1, 2, 3, 4],
+                    "nombre": ["Ana", "Luis", "Sofía", "Pedro"],
+                    "ciudad": ["Bogotá", "Medellín", "Cali", "Bogotá"]
+                    })
+
+                    # Paso 2: Crear DataFrame de compras
+                    compras = pd.DataFrame({
+                    "id_cliente": [2, 4, 4, 3, 5],
+                    "producto": ["PC", "Celular", "Tablet", "TV", "Consola"],
+                    "precio": [2000, 800, 1200, 1500, 2500]
+                    })
+
+                    print(" Clientes:\n", clientes, "\n")
+                    print(" Compras:\n", compras, "\n")
+
+                    # Paso 3: Merge tipo INNER (solo clientes que tienen compras)
+                    inner = pd.merge(clientes, compras, on="id_cliente", how="inner")
+                    print(" INNER JOIN (solo coincidencias):\n", inner, "\n")
+
+                    # Paso 4: Merge tipo LEFT (todos los clientes, con o sin compras)
+                    left = pd.merge(clientes, compras, on="id_cliente", how="left")
+                    print(" LEFT JOIN (todos los clientes):\n", left, "\n")
+
+                    # Paso 5: Merge tipo OUTER (todos los clientes y todas las compras)
+                    outer = pd.merge(clientes, compras, on="id_cliente", how="outer")
+                    print(" OUTER JOIN (todo combinado):\n", outer, "\n")
+
+		    RESULTADO:
+
+		        Clientes:
+                id_cliente nombre    ciudad
+             0           1    Ana    Bogotá
+             1           2   Luis  Medellín
+             2           3  Sofía      Cali
+             3           4  Pedro    Bogotá 
+
+                Compras:
+                id_cliente producto  precio
+             0           2       PC    2000
+             1           4  Celular     800
+             2           4   Tablet    1200
+             3           3       TV    1500
+             4           5  Consola    2500 
+
+                INNER JOIN (solo coincidencias):
+                id_cliente nombre    ciudad producto  precio
+             0           2   Luis  Medellín       PC    2000
+             1           3  Sofía      Cali       TV    1500
+             2           4  Pedro    Bogotá  Celular     800
+             3           4  Pedro    Bogotá   Tablet    1200 
+
+                LEFT JOIN (todos los clientes):
+                id_cliente nombre    ciudad producto  precio
+             0           1    Ana    Bogotá      NaN     NaN
+             1           2   Luis  Medellín       PC  2000.0
+             2           3  Sofía      Cali       TV  1500.0
+             3           4  Pedro    Bogotá  Celular   800.0
+             4           4  Pedro    Bogotá   Tablet  1200.0 
+
+                OUTER JOIN (todo combinado):
+                id_cliente nombre    ciudad producto  precio
+             0           1    Ana    Bogotá      NaN     NaN
+             1           2   Luis  Medellín       PC  2000.0
+             2           3  Sofía      Cali       TV  1500.0
+             3           4  Pedro    Bogotá  Celular   800.0
+             4           4  Pedro    Bogotá   Tablet  1200.0
+             5           5    NaN       NaN  Consola  2500.0 
+
+		    JOIN:
+
+                import pandas as pd
+
+                # Paso 1: Crear DataFrame de empleados (usando índice con IDs)
+                empleados = pd.DataFrame({
+                "Nombre": ["Ana", "Luis", "Sofía", "Pedro"],
+                "Ciudad": ["Bogotá", "Medellín", "Cali", "Bogotá"]
+                }, index=[1, 2, 3, 4])
+
+                # Paso 2: Crear DataFrame de salarios (también con IDs como índice)
+                salarios = pd.DataFrame({
+                "Salario": [2500, 4000, 3200, 5000]
+                }, index=[2, 3, 4, 5])  # fíjate que el índice 5 no existe en empleados
+
+                print(" Empleados:\n", empleados, "\n")
+                print(" Salarios:\n", salarios, "\n")
+
+                # Paso 3: Hacer un JOIN por índice
+                inner = empleados.join(salarios, how="inner")
+                print(" INNER JOIN (solo IDs que coinciden):\n", inner, "\n")
+
+                left = empleados.join(salarios, how="left")
+                print(" LEFT JOIN (todos los empleados, aunque no tengan salario):\n", left, "\n")
+
+                outer = empleados.join(salarios, how="outer")
+                print(" OUTER JOIN (todos los empleados y todos los salarios):\n", outer, "\n")
+
+		    RESULTADO:
+
+                Clientes:
+                id_cliente nombre    ciudad
+             0           1    Ana    Bogotá
+             1           2   Luis  Medellín
+             2           3  Sofía      Cali
+             3           4  Pedro    Bogotá 
+
+                Compras:
+                id_cliente producto  precio
+             0           2       PC    2000
+             1           4  Celular     800
+             2           4   Tablet    1200
+             3           3       TV    1500
+             4           5  Consola    2500 
+
+                INNER JOIN (solo coincidencias):
+                id_cliente nombre    ciudad producto  precio
+             0           2   Luis  Medellín       PC    2000
+             1           3  Sofía      Cali       TV    1500
+             2           4  Pedro    Bogotá  Celular     800
+             3           4  Pedro    Bogotá   Tablet    1200 
+
+                LEFT JOIN (todos los clientes):
+                id_cliente nombre    ciudad producto  precio
+             0           1    Ana    Bogotá      NaN     NaN
+             1           2   Luis  Medellín       PC  2000.0
+             2           3  Sofía      Cali       TV  1500.0
+             3           4  Pedro    Bogotá  Celular   800.0
+             4           4  Pedro    Bogotá   Tablet  1200.0 
+
+                OUTER JOIN (todo combinado):
+                id_cliente nombre    ciudad producto  precio
+             0           1    Ana    Bogotá      NaN     NaN
+             1           2   Luis  Medellín       PC  2000.0
+             2           3  Sofía      Cali       TV  1500.0
+             3           4  Pedro    Bogotá  Celular   800.0
+             4           4  Pedro    Bogotá   Tablet  1200.0
+             5           5    NaN       NaN  Consola  2500.0 
+
+            MANEJO DE VALORES NULOS:
+
+            	import pandas as pd
+
+                import numpy as np
+
+                # Paso 1: Crear un DataFrame con valores nulos
+                data = {
+                "Nombre": ["Ana", "Luis", "Sofía", None, "Pedro"],
+                "Edad": [20, np.nan, 25, 30, None],
+                "Ciudad": ["Bogotá", "Medellín", None, "Cali", "Bogotá"],
+                "Salario": [2500, 4000, None, 5000, 4200]
+                }
+
+                df = pd.DataFrame(data)
+
+                print(" DataFrame original:\n")
+                print(df)
+
+                # Paso 2: Detectar nulos
+                print("\n Cantidad de nulos por columna:\n")
+                print(df.isnull().sum())
+
+                # Paso 3: Eliminar filas con nulos
+                df_drop = df.dropna()
+                print("\n DataFrame después de dropna() (elimino filas con nulos):\n")
+                print(df_drop)
+
+                # Paso 4: Rellenar nulos con un valor fijo
+                df_fill = df.fillna("Desconocido")
+                print("\n DataFrame después de fillna('Desconocido'):\n")
+                print(df_fill)
+
+                # Paso 5: Rellenar nulos en columnas numéricas con la media
+                df_media = df.copy()
+                df_media["Edad"].fillna(df_media["Edad"].mean(), inplace=True)
+                df_media["Salario"].fillna(df_media["Salario"].mean(), inplace=True)
+
+                print("\n DataFrame rellenando nulos con la media en columnas numéricas:\n")
+                print(df_media)
+
+                # Paso 6: Rellenar nulos con el valor anterior (forward fill)
+                df_ffill = df.fillna(method="ffill")
+                print("\n DataFrame después de forward fill (ffill):\n")
+                print(df_ffill)
+
+                # Paso 7: Interpolación en columna numérica (estimación)
+                df_interp = df.copy()
+                df_interp["Edad"] = df_interp["Edad"].interpolate()
+
+                print("\n DataFrame después de interpolar la columna Edad:\n")
+                print(df_interp)
+
+		    RESULTADO:
+		
+		        DataFrame original:
+
+                Nombre  Edad    Ciudad  Salario
+              0    Ana  20.0    Bogotá   2500.0
+              1   Luis   NaN  Medellín   4000.0
+              2  Sofía  25.0      None      NaN
+              3   None  30.0      Cali   5000.0
+              4  Pedro   NaN    Bogotá   4200.0
+
+                Cantidad de nulos por columna:
+
+                Nombre     1
+                Edad       2
+                Ciudad     1
+                Salario    1
+                dtype: int64
+
+                DataFrame después de dropna() (elimino filas con nulos):
+
+                Nombre  Edad  Ciudad  Salario
+              0    Ana  20.0  Bogotá   2500.0
+
+                DataFrame después de fillna('Desconocido'):
+
+                Nombre         Edad       Ciudad      Salario
+        0          Ana         20.0       Bogotá       2500.0
+        1         Luis  Desconocido     Medellín       4000.0
+        2        Sofía         25.0  Desconocido  Desconocido
+        3  Desconocido         30.0         Cali       5000.0
+        4        Pedro  Desconocido       Bogotá       4200.0
+
+                DataFrame rellenando nulos con la media en columnas numéricas:
+
+                Nombre  Edad    Ciudad  Salario
+              0    Ana  20.0    Bogotá   2500.0
+              1   Luis  25.0  Medellín   4000.0
+              2  Sofía  25.0      None   3925.0
+              3   None  30.0      Cali   5000.0
+              4  Pedro  25.0    Bogotá   4200.0
+
+                DataFrame después de forward fill (ffill):
+
+                Nombre  Edad    Ciudad  Salario
+              0    Ana  20.0    Bogotá   2500.0
+              1   Luis  20.0  Medellín   4000.0
+              2  Sofía  25.0  Medellín   4000.0
+              3  Sofía  30.0      Cali   5000.0
+              4  Pedro  30.0    Bogotá   4200.0
+
+                DataFrame después de interpolar la columna Edad:
+
+                Nombre  Edad    Ciudad  Salario
+              0    Ana  20.0    Bogotá   2500.0
+              1   Luis  22.5  Medellín   4000.0
+              2  Sofía  25.0      None      NaN
+              3   None  30.0      Cali   5000.0
+              4  Pedro  30.0    Bogotá   4200.0
+
+            EXPORTACION/IMPORTACION:
+
+                import pandas as pd
+
+                # Paso 1: Crear un DataFrame de ejemplo
+                data = {
+                "Nombre": ["Ana", "Luis", "Sofía", "Pedro"],
+                "Edad": [20, 25, 30, 22],
+                "Ciudad": ["Bogotá", "Medellín", "Cali", "Cartagena"],
+                "Salario": [2500, 4000, 5000, 3200]
+                }
+
+                df = pd.DataFrame(data)
+
+                print(" DataFrame original:\n")
+                print(df)
+
+            # -------------------- EXPORTACIÓN --------------------
+
+                # Exportar a CSV
+                df.to_csv("empleados.csv", index=False)
+
+                # Exportar a Excel
+                df.to_excel("empleados.xlsx", index=False)
+
+                # Exportar a JSON
+                df.to_json("empleados.json", orient="records", lines=True)
+
+                print("\n Archivos exportados: empleados.csv, empleados.xlsx, empleados.json")
+
+            # -------------------- IMPORTACIÓN --------------------
+
+                # Importar desde CSV
+                df_csv = pd.read_csv("empleados.csv")
+                print("\n DataFrame leído desde CSV:\n")
+                print(df_csv)
+
+                # Importar desde Excel
+                df_excel = pd.read_excel("empleados.xlsx")
+                print("\n DataFrame leído desde Excel:\n")
+                print(df_excel)
+
+                # Importar desde JSON
+                df_json = pd.read_json("empleados.json", lines=True)
+                print("\n DataFrame leído desde JSON:\n")
+                print(df_json)
+
+		    RESULTADO:
+
+		        DataFrame original:
+
+                Nombre  Edad     Ciudad  Salario
+              0    Ana    20     Bogotá     2500
+              1   Luis    25   Medellín     4000
+              2  Sofía    30       Cali     5000
+              3  Pedro    22  Cartagena     3200
+
+                Archivos exportados: empleados.csv, empleados.xlsx, empleados.json
+
+                DataFrame leído desde CSV:
+
+                Nombre  Edad     Ciudad  Salario
+              0    Ana    20     Bogotá     2500
+              1   Luis    25   Medellín     4000
+              2  Sofía    30       Cali     5000
+              3  Pedro    22  Cartagena     3200
+
+                DataFrame leído desde Excel:
+
+                Nombre  Edad     Ciudad  Salario
+              0    Ana    20     Bogotá     2500
+              1   Luis    25   Medellín     4000
+              2  Sofía    30       Cali     5000
+              3  Pedro    22  Cartagena     3200
+
+                DataFrame leído desde JSON:
+
+                Nombre  Edad     Ciudad  Salario
+              0    Ana    20     Bogotá     2500
+              1   Luis    25   Medellín     4000
+              2  Sofía    30       Cali     5000
+              3  Pedro    22  Cartagena     3200
+
+FIN.
