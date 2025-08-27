@@ -850,3 +850,87 @@ Salida:
          Fecha_ingreso    datetime64[ns]
          Ciudad                 category
          dtype: object
+
+###### Seccion D - Pandas - Avanzado
+    -Rama: D-Pandas-Avanzado
+
+        Que son las operaciones avanzadas en dataframes?
+
+            Son aquellas operaciones que van más allá de las tareas básicas de crear, cargar o seleccionar datos. Se enfocan en transformar, combinar, agrupar, resumir o aplicar funciones complejas sobre los datos.
+
+            A continuación te mostrare un resumen de las principales:
+
+        1.Filtros
+
+            Esto consisten en seleccionar filas de un DataFrame que cumplen una o varias condiciones lógicas, en resumen se evalúa una o varias condiciones en una columna y pandas devuelve solo las filas que cumplan la condición. Pero existen diferentes tipos de filtro como lo son:
+
+                A.Filtro simple
+
+                B.Filtro por igualdad
+
+                C.Multiples condiciones (AND(&), OR(|))
+                
+                D.Filtro por valore4s en una lista (isin)
+                
+                E.Filtros con negacion (~)
+
+                F.Filtros con cadenas (str.contains)
+        
+        2.Groupby
+
+            El groupby en pandas es una de las operaciones avanzadas más importantes porque permite agrupar datos por una o varias columnas y luego aplicarles funciones de agregación o transformación parecido a las tablas dinámicas en SQL.
+
+        3.Merge/join
+
+            En pandas sirven para combinar DataFrames, parecido a cómo se hace en SQL.
+
+            Merge:
+
+                Es una función que combina dos DataFrames en base a una o varias columnas en común,
+                funciona igual que los joins en SQL (INNER, LEFT, RIGHT, OUTER).
+            
+            Join:
+
+                El join es muy parecido a merge, pero funciona sobre los índices en lugar de las columnas.
+
+        4.Manejo de valores nulos
+
+            En pandas el manejo de valores nulos (NaN = Not a Number) aparecen cuando faltan datos en el DataFrame, y si no los tratamos bien, lo que puede dañar cálculos o análisis, pero podemos prevenir teniendo en cuanto lo siguiente.
+
+                A.Identificar valores nulos
+
+                B.Detectar Nulos
+
+                C.Eliminar valores nulos
+
+                D.Rellenar valores nulos
+
+                E.Reemplazar nulos en columnas especificas
+
+                F.Interpolacion (para series numericas)
+
+                G.Detectar y reemplazar valores atipicos o personalizados 
+        
+        5.Exportacion/Importacion
+
+            La importación y exportación de datos en pandas, es clave porque casi siempre trabajamos con archivos externos (Excel, CSV, bases de datos, etc.) y luego necesitamos guardar los resultados.
+
+            IMPORTACION:
+
+                A.read_CSV
+
+                B.read_Excel
+
+                C.read_JSON
+
+                D.read_SQL
+
+            EXPORTACION:
+
+                A.to_CSV
+
+                B.to_Excel
+
+                C.to_JSON
+
+                D.to_SQL
