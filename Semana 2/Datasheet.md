@@ -616,4 +616,237 @@ Salida:
          
          Categorías
          category->Datos con un número limitado de valores repetidos. Muy útil para ahorrar memoria y acelerar cálculos.
+        
+        EJEMPLOS:
          
+         DataFrame:
+         
+         //Paso 1: importar pandas
+         import pandas as pd
+
+         //Paso 2: crear un DataFrame sencillo
+         data = {
+            "Nombre": ["Ana", "Luis", "Marta"],
+            "Edad": [23, 35, 29],
+            "Ciudad": ["Bogotá", "Medellín", "Cali"]
+         }
+
+         df = pd.DataFrame(data)
+
+         //Paso 3: mostrar el DataFrame
+         print("DataFrame completo:")
+         print(df)
+
+         //Paso 4: ver información de los datos
+         print("\n Tipos de datos de cada columna:")
+         print(df.dtypes)
+
+         // Paso 5: mostrar las primeras filas (head)
+         print("\n Primeras filas del DataFrame:")
+         print(df.head())
+
+        Resultado:
+
+          DataFrame completo:
+          Nombre  Edad    Ciudad
+        0    Ana    23    Bogotá
+        1   Luis    35  Medellín
+        2  Marta    29      Cali
+
+          Tipos de datos de cada columna:
+            Nombre    object
+            Edad       int64
+            Ciudad    object
+            dtype: object
+
+          Primeras filas del DataFrame:
+            Nombre  Edad    Ciudad
+          0    Ana    23    Bogotá
+          1   Luis    35  Medellín
+          2  Marta    29      Cali
+        
+        SERIES:
+         
+         import pandas as pd
+
+         //Crear una Serie a partir de una lista
+            serie = pd.Series([10, 20, 30, 40, 50])
+
+            print(" Serie de ejemplo:")
+            print(serie)
+
+         //Acceder a elementos por índice
+            print("\n Elemento en la posición 0:", serie[0])
+            print(" Elemento en la posición 3:", serie[3])
+
+         //Crear una Serie con etiquetas personalizadas (índice)
+            serie_con_etiquetas = pd.Series(
+            [100, 200, 300],
+            index=["A", "B", "C"]
+            )
+
+            print("\n Serie con etiquetas personalizadas:")
+            print(serie_con_etiquetas)
+
+         //Acceder usando la etiqueta
+            print("\n Valor con etiqueta 'B':", serie_con_etiquetas["B"])
+        
+        Resultado:
+
+        Serie de ejemplo:
+            0    10
+            1    20
+            2    30
+            3    40
+            4    50
+         dtype: int64
+
+         Elemento en la posición 0: 10
+         Elemento en la posición 3: 40
+
+        Serie con etiquetas personalizadas:
+            A    100
+            B    200
+            C    300
+         dtype: int64
+
+        Valor con etiqueta 'B': 200
+
+        Carga de datos:
+
+            import pandas as pd
+
+            //Paso 1: Crear un archivo CSV como ejemplo
+            data = """Nombre,Edad,Ciudad
+            Ana,23,Bogotá
+            Luis,35,Medellín
+            Marta,29,Cali
+            """
+            with open("personas.csv", "w") as f:
+            f.write(data)
+
+            //Paso 2: Cargar el CSV con Pandas
+            df = pd.read_csv("personas.csv")
+
+            //Paso 3: Mostrar resultados
+            print(" DataFrame cargado desde CSV:")
+            print(df)
+
+            print("\n Tipos de datos:")
+            print(df.dtypes)
+
+            print("\n Primeras filas:")
+            print(df.head())
+
+        Resultado:
+
+            DataFrame cargado desde CSV:
+            Nombre  Edad    Ciudad
+          0    Ana    23    Bogotá
+          1   Luis    35  Medellín
+          2  Marta    29      Cali
+
+            Tipos de datos:
+            Nombre    object
+            Edad       int64
+            Ciudad    object
+            dtype: object
+
+            Primeras filas:
+            Nombre  Edad    Ciudad
+          0    Ana    23    Bogotá
+          1   Luis    35  Medellín
+          2  Marta    29      Cali
+
+        Seleccion de columnas:
+
+            import pandas as pd
+
+            # Crear un DataFrame de ejemplo
+            data = {
+            "Nombre": ["Ana", "Luis", "Marta"],
+            "Edad": [23, 35, 29],
+            "Ciudad": ["Bogotá", "Medellín", "Cali"]
+            }
+
+            df = pd.DataFrame(data)
+
+            print(" DataFrame original:")
+            print(df)
+
+            # --- Selección de UNA columna ---
+            print("\n Selección de la columna 'Nombre':")
+            print(df["Nombre"])   # Devuelve una Serie
+
+            # --- Selección de VARIAS columnas ---
+            print("\n Selección de 'Nombre' y 'Ciudad':")
+            print(df[["Nombre", "Ciudad"]])   # Devuelve un DataFrame
+
+            # --- Selección usando notación de punto (solo si no hay espacios en el nombre) ---
+            print("\n Selección de la columna 'Edad' con notación de punto:")
+            print(df.Edad)
+
+        Resultado:
+
+         DataFrame original:
+          Nombre  Edad    Ciudad
+        0    Ana    23    Bogotá
+        1   Luis    35  Medellín
+        2  Marta    29      Cali
+
+          Selección de la columna 'Nombre':
+         0      Ana
+         1     Luis
+         2    Marta
+         Name: Nombre, dtype: object
+
+          Selección de 'Nombre' y 'Ciudad':
+          Nombre    Ciudad
+        0    Ana    Bogotá
+        1   Luis  Medellín
+        2  Marta      Cali
+
+          Selección de la columna 'Edad' con notación de punto:
+            0    23
+            1    35
+            2    29
+          Name: Edad, dtype: int64
+
+        Tipos de datos:
+
+            import pandas as pd
+
+            //Crear un DataFrame con varios tipos de datos
+            data = {  
+            "Nombre": ["Ana", "Luis", "Marta"],             # Texto (object)
+            "Edad": [23, 35, 29],                           # Enteros (int64)
+            "Ingreso": [1500.50, 2500.00, 1800.75],         # Decimales (float64)
+            "Activo": [True, False, True],                  # Booleanos (bool)
+            "Fecha_ingreso": pd.to_datetime(["2023-05-10", "2022-11-20", "2024-01-15"]), # Fecha (datetime64)
+            "Ciudad": pd.Categorical(["Bogotá", "Medellín", "Cali"]) # Categórico
+            }
+
+            df = pd.DataFrame(data)
+
+            print(" DataFrame:")
+            print(df)
+
+            print("\n Tipos de datos:")
+            print(df.dtypes)
+
+        Resultado:
+
+         DataFrame:
+         Nombre  Edad  Ingreso  Activo Fecha_ingreso    Ciudad
+       0    Ana    23  1500.50    True    2023-05-10    Bogotá
+       1   Luis    35  2500.00   False    2022-11-20  Medellín
+       2  Marta    29  1800.75    True    2024-01-15      Cali
+
+         Tipos de datos:
+         Nombre                   object
+         Edad                      int64
+         Ingreso                 float64
+         Activo                     bool
+         Fecha_ingreso    datetime64[ns]
+         Ciudad                 category
+         dtype: object
